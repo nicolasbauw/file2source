@@ -6,8 +6,8 @@
 #include <imgui_impl_opengl2.h>
 #include <stdio.h>
 #include <string.h>
-#include "GLFW/glfw3.h"
-#ifdef WIN32
+#include <GLFW/glfw3.h>
+#ifdef _WIN32
 #include <windows.h>
 #endif
 #include "defs.h"
