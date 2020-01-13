@@ -1,0 +1,8 @@
+# Exclusion fichiers code blocks
+*.cbp
+*.layout
+*.depend
+bin/
+obj/
+file2source
+.DS_Store
