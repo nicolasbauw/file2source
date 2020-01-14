@@ -54,10 +54,10 @@ int main(int, char**)
         ImGui::SetNextWindowPos(ImVec2(0, 0));
         window_flags |= ImGuiWindowFlags_NoTitleBar|ImGuiWindowFlags_NoCollapse|ImGuiWindowFlags_NoResize|ImGuiWindowFlags_NoSavedSettings|ImGuiWindowFlags_NoMove;
         ImGui::Begin("File2source", &show_main_window,window_flags);
-        //ImGui::PushID(i);
-        /*ImGui::PushStyleColor(ImGuiCol_Button, ImColor::HSV(i/7.0f, 0.6f, 0.6f));
-        ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor::HSV(i/7.0f, 0.7f, 0.7f));
-        ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor::HSV(i/7.0f, 0.8f, 0.8f));*/
+        ImGui::PushID(i);
+        ImGui::PushStyleColor(ImGuiCol_Button, (ImVec4)ImColor::HSV(i/7.0f, 0.6f, 0.6f));
+        ImGui::PushStyleColor(ImGuiCol_ButtonHovered, (ImVec4)ImColor::HSV(i/7.0f, 0.7f, 0.7f));
+        ImGui::PushStyleColor(ImGuiCol_ButtonActive, (ImVec4)ImColor::HSV(i/7.0f, 0.8f, 0.8f));
         if (ImGui::Button("Select binary or RAW file")) {};
         ImGui::SameLine();ImGui::InputText("Input", InputFile, 100);
         if (ImGui::Button("  Select C source file   ")) {};
@@ -71,8 +71,8 @@ int main(int, char**)
         if (ImGui::Button("  Quit  ")) { quit = 1; }
         ImGui::SameLine();
         if (ImGui::Button("Generate")) {if (raw == true) result = raw2source(); if (raw == false) result = bin2source();};
-        //ImGui::PopStyleColor(3);
-        //ImGui::PopID();
+        ImGui::PopStyleColor(3);
+        ImGui::PopID();
         if (result == 0) ShowOverlay(&show_app_fixed_overlay);
         if (result == 1) ShowOverlay(&show_app_fixed_overlay);
         if (result == 2) ShowOverlay(&show_app_fixed_overlay);
