@@ -25,20 +25,16 @@ int main(int, char**)
     glfwSetErrorCallback(error_callback);
     if (!glfwInit())
         return 1;
-        glfwSwapInterval(2);
         glfwWindowHint(GLFW_RESIZABLE,GL_FALSE);
     GLFWwindow* window = glfwCreateWindow(760,200, "File2source", NULL, NULL);
     glfwMakeContextCurrent(window);
-    ImGui_ImplGlfw_InitForOpenGL(window, true);
-    ImGui_ImplOpenGL2_Init();
-    ImGuiIO& io = ImGui::GetIO();
-        io.IniFilename = NULL;
     glfwSwapInterval(1);
     ImGui::CreateContext();
-
-    // Setup ImGui binding
+    ImGuiIO& io = ImGui::GetIO();
+        io.IniFilename = NULL;
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL2_Init();
+
     bool show_main_window = true;
     ImGuiWindowFlags window_flags = 0;
     ImVec4 clear_color = ImColor(0.7f, 0.7f, 0.7f);
@@ -47,14 +43,16 @@ int main(int, char**)
     while (!glfwWindowShouldClose(window))
     {
         glfwPollEvents();
+        ImGui_ImplOpenGL2_NewFrame();
         ImGui_ImplGlfw_NewFrame();
+        ImGui::NewFrame();
 
         // Affichage de l'interface
         {
             ImGui::SetNextWindowSize(ImVec2(760,200));
             window_flags |= ImGuiWindowFlags_NoTitleBar|ImGuiWindowFlags_NoCollapse|ImGuiWindowFlags_NoResize|ImGuiWindowFlags_NoSavedSettings|ImGuiWindowFlags_NoMove;
             ImGui::Begin("File2source", &show_main_window,window_flags);
-            ImGui::PushID(i);
+            //ImGui::PushID(i);
             /*ImGui::PushStyleColor(ImGuiCol_Button, ImColor::HSV(i/7.0f, 0.6f, 0.6f));
             ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor::HSV(i/7.0f, 0.7f, 0.7f));
             ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor::HSV(i/7.0f, 0.8f, 0.8f));*/
@@ -72,8 +70,8 @@ int main(int, char**)
             ImGui::SameLine();
             if (ImGui::Button("Generate")) {if (raw == true) result = raw2source(); if (raw == false) result = bin2source();};
             ImGui::Text("1.0");
-            ImGui::PopStyleColor(3);
-            ImGui::PopID();
+            //ImGui::PopStyleColor(3);
+            //ImGui::PopID();
             if (result == 0) ShowOverlay(&show_app_fixed_overlay);
             if (result == 1) ShowOverlay(&show_app_fixed_overlay);
             if (result == 2) ShowOverlay(&show_app_fixed_overlay);
