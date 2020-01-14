@@ -1,4 +1,3 @@
-//OPENFILENAME ofn ;      // nom du fichier � ouvrir via boite de dialogue
 char InputFile[100] ;      // buffers contenant les noms des fichier
 char OutputFile[100];
 char table[100];
@@ -16,4 +15,7 @@ int result =3;
 void GetFileName();
 int raw2source();
 int bin2source();
-//DWORD curtime,prevtime;
+#ifdef _WIN32
+DWORD curtime,prevtime;
+OPENFILENAME ofn ;      // nom du fichier à ouvrir via boite de dialogue
+#endif

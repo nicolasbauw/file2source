@@ -105,7 +105,8 @@ int main(int, char**)
     return 0;
 }
 
-/*Filename requester
+#ifdef _WIN32
+//Filename requester
 void GetFileName()
 {
         // open a file name
@@ -121,7 +122,8 @@ void GetFileName()
     	ofn.nMaxFileTitle = 0 ;
     	ofn.lpstrInitialDir=NULL ;
     	GetOpenFileName( &ofn );
-    };*/
+    };
+#endif
 
 // Messages display
 static void ShowOverlay(bool* opened)
