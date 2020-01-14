@@ -9,14 +9,11 @@
 #include <GLFW/glfw3.h>
 #ifdef _WIN32
 #include <windows.h>
+#pragma comment(linker, "/SUBSYSTEM:windows /ENTRY:mainCRTStartup")
 #endif
 #include "defs.h"
 #include "raw2source.c"
 #include "bin2source.c"
-
-#ifdef _WIN32
-#pragma comment(linker, "/SUBSYSTEM:windows /ENTRY:mainCRTStartup")
-#endif
 
 static void error_callback(int error, const char* description)
 {
