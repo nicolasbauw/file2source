@@ -50,36 +50,34 @@ int main(int, char**)
         ImGui::NewFrame();
 
         // Interface display
-        {
-            ImGui::SetNextWindowSize(ImVec2(760,190));
-            ImGui::SetNextWindowPos(ImVec2(0, 0));
-            window_flags |= ImGuiWindowFlags_NoTitleBar|ImGuiWindowFlags_NoCollapse|ImGuiWindowFlags_NoResize|ImGuiWindowFlags_NoSavedSettings|ImGuiWindowFlags_NoMove;
-            ImGui::Begin("File2source", &show_main_window,window_flags);
-            //ImGui::PushID(i);
-            /*ImGui::PushStyleColor(ImGuiCol_Button, ImColor::HSV(i/7.0f, 0.6f, 0.6f));
-            ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor::HSV(i/7.0f, 0.7f, 0.7f));
-            ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor::HSV(i/7.0f, 0.8f, 0.8f));*/
-            if (ImGui::Button("Select binary or RAW file")) {};
-            ImGui::SameLine();ImGui::InputText("Input", InputFile, 100);
-            if (ImGui::Button("  Select C source file   ")) {};
-            ImGui::SameLine();ImGui::InputText("Output", OutputFile, 100);
-            ImGui::Button("    UINT8 array name     ");ImGui::SameLine();ImGui::InputText("Array", table, 16);
-            ImGui::Button("Enter RAW width / height ");ImGui::SameLine();ImGui::InputInt2("W/H", rawsize);
-            ImGui::Checkbox("UINT8 typedef", &uint8def);ImGui::SameLine();ImGui::Checkbox("File is a RAW image", &raw);ImGui::SameLine();//ImGui::Checkbox("Convert to RGBA", &rgbaconvert);
-            ImGui::SameLine();ImGui::Text("      RAW is:");ImGui::SameLine();ImGui::RadioButton("24 bits", &bpp, 0);ImGui::SameLine();ImGui::RadioButton("32 bits", &bpp, 1);ImGui::SameLine();ImGui::RadioButton("24->32 conversion", &bpp, 3);
-            ImGui::ColorEdit3("Transparent color for RGBA conv.", col1);
-            ImGui::Spacing();ImGui::Spacing();ImGui::Spacing();ImGui::Spacing();ImGui::Text("1.1                                        ");ImGui::SameLine();
-            if (ImGui::Button("  Quit  ")) { quit = 1; }
-            ImGui::SameLine();
-            if (ImGui::Button("Generate")) {if (raw == true) result = raw2source(); if (raw == false) result = bin2source();};
-            //ImGui::PopStyleColor(3);
-            //ImGui::PopID();
-            if (result == 0) ShowOverlay(&show_app_fixed_overlay);
-            if (result == 1) ShowOverlay(&show_app_fixed_overlay);
-            if (result == 2) ShowOverlay(&show_app_fixed_overlay);
-            ImGui::End();
-        }
-
+        ImGui::SetNextWindowSize(ImVec2(760,190));
+        ImGui::SetNextWindowPos(ImVec2(0, 0));
+        window_flags |= ImGuiWindowFlags_NoTitleBar|ImGuiWindowFlags_NoCollapse|ImGuiWindowFlags_NoResize|ImGuiWindowFlags_NoSavedSettings|ImGuiWindowFlags_NoMove;
+        ImGui::Begin("File2source", &show_main_window,window_flags);
+        //ImGui::PushID(i);
+        /*ImGui::PushStyleColor(ImGuiCol_Button, ImColor::HSV(i/7.0f, 0.6f, 0.6f));
+        ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor::HSV(i/7.0f, 0.7f, 0.7f));
+        ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor::HSV(i/7.0f, 0.8f, 0.8f));*/
+        if (ImGui::Button("Select binary or RAW file")) {};
+        ImGui::SameLine();ImGui::InputText("Input", InputFile, 100);
+        if (ImGui::Button("  Select C source file   ")) {};
+        ImGui::SameLine();ImGui::InputText("Output", OutputFile, 100);
+        ImGui::Button("    UINT8 array name     ");ImGui::SameLine();ImGui::InputText("Array", table, 16);
+        ImGui::Button("Enter RAW width / height ");ImGui::SameLine();ImGui::InputInt2("W/H", rawsize);
+        ImGui::Checkbox("UINT8 typedef", &uint8def);ImGui::SameLine();ImGui::Checkbox("File is a RAW image", &raw);ImGui::SameLine();//ImGui::Checkbox("Convert to RGBA", &rgbaconvert);
+        ImGui::SameLine();ImGui::Text("      RAW is:");ImGui::SameLine();ImGui::RadioButton("24 bits", &bpp, 0);ImGui::SameLine();ImGui::RadioButton("32 bits", &bpp, 1);ImGui::SameLine();ImGui::RadioButton("24->32 conversion", &bpp, 3);
+        ImGui::ColorEdit3("Transparent color for RGBA conv.", col1);
+        ImGui::Spacing();ImGui::Spacing();ImGui::Spacing();ImGui::Spacing();ImGui::Text("1.1                                        ");ImGui::SameLine();
+        if (ImGui::Button("  Quit  ")) { quit = 1; }
+        ImGui::SameLine();
+        if (ImGui::Button("Generate")) {if (raw == true) result = raw2source(); if (raw == false) result = bin2source();};
+        //ImGui::PopStyleColor(3);
+        //ImGui::PopID();
+        if (result == 0) ShowOverlay(&show_app_fixed_overlay);
+        if (result == 1) ShowOverlay(&show_app_fixed_overlay);
+        if (result == 2) ShowOverlay(&show_app_fixed_overlay);
+        ImGui::End();
+        
         // Rendering
         ImGui::Render();
         int display_w, display_h;
