@@ -49,7 +49,8 @@ int main(int, char**)
 
         // Affichage de l'interface
         {
-            ImGui::SetNextWindowSize(ImVec2(760,200));
+            ImGui::SetNextWindowSize(ImVec2(760,210));
+            ImGui::SetNextWindowPos(ImVec2(0, 0));
             window_flags |= ImGuiWindowFlags_NoTitleBar|ImGuiWindowFlags_NoCollapse|ImGuiWindowFlags_NoResize|ImGuiWindowFlags_NoSavedSettings|ImGuiWindowFlags_NoMove;
             ImGui::Begin("File2source", &show_main_window,window_flags);
             //ImGui::PushID(i);
