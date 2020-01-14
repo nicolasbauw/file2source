@@ -26,7 +26,7 @@ int main(int, char**)
     if (!glfwInit())
         return 1;
         glfwWindowHint(GLFW_RESIZABLE,GL_FALSE);
-    GLFWwindow* window = glfwCreateWindow(760,200, "File2source", NULL, NULL);
+    GLFWwindow* window = glfwCreateWindow(760,190, "File2source", NULL, NULL);
     glfwMakeContextCurrent(window);
     glfwSwapInterval(1);
     ImGui::CreateContext();
@@ -49,7 +49,7 @@ int main(int, char**)
 
         // Affichage de l'interface
         {
-            ImGui::SetNextWindowSize(ImVec2(760,210));
+            ImGui::SetNextWindowSize(ImVec2(760,190));
             ImGui::SetNextWindowPos(ImVec2(0, 0));
             window_flags |= ImGuiWindowFlags_NoTitleBar|ImGuiWindowFlags_NoCollapse|ImGuiWindowFlags_NoResize|ImGuiWindowFlags_NoSavedSettings|ImGuiWindowFlags_NoMove;
             ImGui::Begin("File2source", &show_main_window,window_flags);
@@ -66,11 +66,11 @@ int main(int, char**)
             ImGui::Checkbox("UINT8 typedef", &uint8def);ImGui::SameLine();ImGui::Checkbox("File is a RAW image", &raw);ImGui::SameLine();//ImGui::Checkbox("Convert to RGBA", &rgbaconvert);
             ImGui::SameLine();ImGui::Text("      RAW is:");ImGui::SameLine();ImGui::RadioButton("24 bits", &bpp, 0);ImGui::SameLine();ImGui::RadioButton("32 bits", &bpp, 1);ImGui::SameLine();ImGui::RadioButton("24->32 conversion", &bpp, 3);
             ImGui::ColorEdit3("Transparent color for RGBA conv.", col1);
-            ImGui::Spacing();ImGui::Spacing();ImGui::Spacing();ImGui::Spacing();ImGui::Text("                                           ");ImGui::SameLine();
+            ImGui::Spacing();ImGui::Spacing();ImGui::Spacing();ImGui::Spacing();ImGui::Text("1.1                                        ");ImGui::SameLine();
             if (ImGui::Button("  Quit  ")) {ImGui_ImplGlfw_Shutdown();glfwTerminate();return 0;}
             ImGui::SameLine();
             if (ImGui::Button("Generate")) {if (raw == true) result = raw2source(); if (raw == false) result = bin2source();};
-            ImGui::Text("1.0");
+            //ImGui::Text("1.0");
             //ImGui::PopStyleColor(3);
             //ImGui::PopID();
             if (result == 0) ShowOverlay(&show_app_fixed_overlay);
