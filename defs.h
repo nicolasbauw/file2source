@@ -8,14 +8,13 @@ static bool raw = false;
 static bool uint8def = true;
 static float col1[3] = { 0.0f,1.0f,0.0f };
 static int bpp = 0;     //bpp = 0 -> 24 bits      bpp = 1 -> 32 bits      bpp = 3 -> conversion 24/32
-int i=4;
+static int i=4;
 static bool show_app_fixed_overlay = true;
 static void ShowOverlay(bool* opened);
-int result =3;
+static int result =3;
 void GetFileName();
 int raw2source();
 int bin2source();
 #ifdef _WIN32
-DWORD curtime,prevtime;
 OPENFILENAME ofn ;      // nom du fichier à ouvrir via boite de dialogue
 #endif
