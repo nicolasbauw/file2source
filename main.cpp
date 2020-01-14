@@ -61,9 +61,22 @@ int main(int, char**)
         ImGui::PushStyleColor(ImGuiCol_Button, (ImVec4)ImColor::HSV(i/7.0f, 0.6f, 0.6f));
         ImGui::PushStyleColor(ImGuiCol_ButtonHovered, (ImVec4)ImColor::HSV(i/7.0f, 0.7f, 0.7f));
         ImGui::PushStyleColor(ImGuiCol_ButtonActive, (ImVec4)ImColor::HSV(i/7.0f, 0.8f, 0.8f));
+
+        // Graphical file requester only on windows
+        #ifndef _WIN32
         if (ImGui::Button("Select binary or RAW file")) {};
+        #endif
+        #ifdef _WIN32
+        if (ImGui::Button("Select binary or RAW file")) {GetFileName(); strcpy(InputFile,szFile);};
+        #endif
         ImGui::SameLine();ImGui::InputText("Input", InputFile, 100);
+        #ifndef _WIN32
         if (ImGui::Button("  Select C source file   ")) {};
+        #endif
+        #ifdef _WIN32
+        if (ImGui::Button("  Select C source file   ")) {GetFileName(); strcpy(OutputFile,szFile);};
+        #endif
+
         ImGui::SameLine();ImGui::InputText("Output", OutputFile, 100);
         ImGui::Button("    UINT8 array name     ");ImGui::SameLine();ImGui::InputText("Array", table, 16);
         ImGui::Button("Enter RAW width / height ");ImGui::SameLine();ImGui::InputInt2("W/H", rawsize);
