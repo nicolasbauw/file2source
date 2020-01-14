@@ -25,10 +25,12 @@ int main(int, char**)
     glfwSetErrorCallback(error_callback);
     if (!glfwInit())
         return 1;
-        glfwWindowHint(GLFW_RESIZABLE,GL_FALSE);
+    
+    glfwWindowHint(GLFW_RESIZABLE,GL_FALSE);
     GLFWwindow* window = glfwCreateWindow(760,190, "File2source", NULL, NULL);
     glfwMakeContextCurrent(window);
     glfwSwapInterval(1);
+
     ImGui::CreateContext();
     ImGuiIO& io = ImGui::GetIO();
         io.IniFilename = NULL;
@@ -47,7 +49,7 @@ int main(int, char**)
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
 
-        // Affichage de l'interface
+        // Interface display
         {
             ImGui::SetNextWindowSize(ImVec2(760,190));
             ImGui::SetNextWindowPos(ImVec2(0, 0));
@@ -87,7 +89,6 @@ int main(int, char**)
         glClearColor(clear_color.x, clear_color.y, clear_color.z, clear_color.w);
         glClear(GL_COLOR_BUFFER_BIT);
         ImGui_ImplOpenGL2_RenderDrawData(ImGui::GetDrawData());
-        //glUseProgram(last_program);
 
         glfwMakeContextCurrent(window);
         glfwSwapBuffers(window);
@@ -122,7 +123,7 @@ void GetFileName()
     	GetOpenFileName( &ofn );
     };*/
 
-//Messages display
+// Messages display
 static void ShowOverlay(bool* opened)
 {
     ImGui::SetNextWindowPos(ImVec2(542,148));
