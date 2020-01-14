@@ -79,17 +79,25 @@ int main(int, char**)
         }
 
         // Rendering
+        ImGui::Render();
         int display_w, display_h;
         glfwGetFramebufferSize(window, &display_w, &display_h);
         glViewport(0, 0, display_w, display_h);
         glClearColor(clear_color.x, clear_color.y, clear_color.z, clear_color.w);
         glClear(GL_COLOR_BUFFER_BIT);
-        ImGui::Render();
+        ImGui_ImplOpenGL2_RenderDrawData(ImGui::GetDrawData());
+        //glUseProgram(last_program);
+
+        glfwMakeContextCurrent(window);
         glfwSwapBuffers(window);
     }
 
     // Cleanup
+    ImGui_ImplOpenGL2_Shutdown();
     ImGui_ImplGlfw_Shutdown();
+    ImGui::DestroyContext();
+
+    glfwDestroyWindow(window);
     glfwTerminate();
 
     return 0;
