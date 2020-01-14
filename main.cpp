@@ -42,7 +42,7 @@ int main(int, char**)
     ImVec4 clear_color = ImColor(0.7f, 0.7f, 0.7f);
 
     // Main loop
-    while (!glfwWindowShouldClose(window))
+    while (!glfwWindowShouldClose(window) && !quit)
     {
         glfwPollEvents();
         ImGui_ImplOpenGL2_NewFrame();
@@ -69,10 +69,9 @@ int main(int, char**)
             ImGui::SameLine();ImGui::Text("      RAW is:");ImGui::SameLine();ImGui::RadioButton("24 bits", &bpp, 0);ImGui::SameLine();ImGui::RadioButton("32 bits", &bpp, 1);ImGui::SameLine();ImGui::RadioButton("24->32 conversion", &bpp, 3);
             ImGui::ColorEdit3("Transparent color for RGBA conv.", col1);
             ImGui::Spacing();ImGui::Spacing();ImGui::Spacing();ImGui::Spacing();ImGui::Text("1.1                                        ");ImGui::SameLine();
-            if (ImGui::Button("  Quit  ")) {ImGui_ImplGlfw_Shutdown();glfwTerminate();return 0;}
+            if (ImGui::Button("  Quit  ")) { quit = 1; }
             ImGui::SameLine();
             if (ImGui::Button("Generate")) {if (raw == true) result = raw2source(); if (raw == false) result = bin2source();};
-            //ImGui::Text("1.0");
             //ImGui::PopStyleColor(3);
             //ImGui::PopID();
             if (result == 0) ShowOverlay(&show_app_fixed_overlay);

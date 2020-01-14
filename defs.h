@@ -4,6 +4,7 @@ char OutputFile[100];
 char table[100];
 char szFile[100];
 int rawsize[2];         // rawsize[0] = largeur     rawsize[1] = hauteur
+static bool quit = 0;
 static bool raw = false;
 static bool uint8def = true;
 static float col1[3] = { 0.0f,1.0f,0.0f };
