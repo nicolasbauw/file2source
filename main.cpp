@@ -90,9 +90,7 @@ int main(int, char**)
         if (ImGui::Button("Generate")) {if (raw == true) result = raw2source(); if (raw == false) result = bin2source();};
         ImGui::PopStyleColor(3);
         ImGui::PopID();
-        if (result == 0) ShowOverlay(&show_app_fixed_overlay);
-        if (result == 1) ShowOverlay(&show_app_fixed_overlay);
-        if (result == 2) ShowOverlay(&show_app_fixed_overlay);
+        if (result == 0 || result == 1 || result == 2) ShowOverlay(&show_app_fixed_overlay);
         ImGui::End();
         
         // Rendering
