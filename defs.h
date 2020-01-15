@@ -14,9 +14,9 @@ static int display_w, display_h;
 static bool show_app_fixed_overlay = true;
 static void ShowPopup();
 static int result =3;
-void GetFileName();
 int raw2source();
 int bin2source();
 #ifdef _WIN32
+void GetFileName();
 OPENFILENAME ofn ;      // filename obtained via file requester (windows only)
 #endif
