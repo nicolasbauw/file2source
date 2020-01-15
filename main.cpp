@@ -90,7 +90,7 @@ int main(int, char**)
         if (ImGui::Button("Generate")) {if (raw == true) result = raw2source(); if (raw == false) result = bin2source();};
         ImGui::PopStyleColor(3);
         ImGui::PopID();
-        if (result == 0 || result == 1 || result == 2) ShowOverlay(&show_app_fixed_overlay);
+        if (result == 0 || result == 1 || result == 2) ShowPopup();
         ImGui::End();
         
         // Rendering
@@ -138,8 +138,9 @@ void GetFileName()
 #endif
 
 // Messages display
-static void ShowOverlay(bool* opened)
+static void ShowPopup()
 {
+    bool* opened = &show_app_fixed_overlay;
     ImGui::SetNextWindowPos(ImVec2(540,139));
     if (!ImGui::Begin("Example: Fixed Overlay", opened, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoNav))
     {
