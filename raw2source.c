@@ -1,5 +1,5 @@
 // rawsize[0] = largeur     rawsize[1] = hauteur        bpp = 0 -> 24 bits      bpp = 1 -> 32 bits      bpp = 3 -> conversion 24/32
-// retour 0 : OK        retour 1 : NOK      retour 2 : larheur ou hauteur entrée =0
+// retour 0 : OK        retour 1 : NOK      retour 2 : larheur ou hauteur entrï¿½e =0
 int raw2source()
 {
   unsigned char * data;
@@ -36,7 +36,7 @@ int raw2source()
 
   // open destination file
   file=fopen(OutputFile, "w");
-  if ( file == NULL ) return 1;
+  if ( file == NULL ) { free( data ); return 1; }
 
   // sans conversion en RGBA
   if (uint8def) fprintf(file,"typedef unsigned char UINT8;\n");
