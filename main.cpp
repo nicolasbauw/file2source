@@ -38,7 +38,6 @@ int main(int, char**)
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL2_Init();
 
-    bool show_main_window = true;
     ImGuiWindowFlags window_flags = 0;
     ImVec4 clear_color = ImColor(0.7f, 0.7f, 0.7f);
 
