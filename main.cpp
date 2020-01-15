@@ -54,6 +54,7 @@ int main(int, char**)
         ImGui::SetNextWindowPos(ImVec2(0, 0));
         ImGuiStyle& style = ImGui::GetStyle();
         style.Colors[ImGuiCol_Border] = ImVec4(0.7f, 0.7f, 0.7f, 0.5f);
+        style.Colors[ImGuiCol_WindowBg] = ImVec4(0.25f, 0.25f, 0.25f, 1.0f);
         style.FrameBorderSize = 1.0f;
         window_flags |= ImGuiWindowFlags_NoTitleBar|ImGuiWindowFlags_NoCollapse|ImGuiWindowFlags_NoResize|ImGuiWindowFlags_NoSavedSettings|ImGuiWindowFlags_NoMove;
         ImGui::Begin("File2source", &show_main_window,window_flags);
