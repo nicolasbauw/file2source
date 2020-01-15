@@ -1,5 +1,5 @@
-// rawsize[0] = largeur     rawsize[1] = hauteur        bpp = 0 -> 24 bits      bpp = 1 -> 32 bits      bpp = 3 -> conversion 24/32
-// retour 0 : OK        retour 1 : NOK      retour 2 : larheur ou hauteur entr�e =0
+// rawsize[0] = width     rawsize[1] = height        bpp = 0 -> 24 bits      bpp = 1 -> 32 bits      bpp = 3 -> 24/32 conversion
+// returns 0 : OK        1 : NOK      2 : no width or height provided
 int raw2source()
 {
   unsigned char * data;
@@ -38,14 +38,14 @@ int raw2source()
   file=fopen(OutputFile, "w");
   if ( file == NULL ) { free( data ); return 1; }
 
-  // sans conversion en RGBA
+  // without RGBA conversion
   if (uint8def) fprintf(file,"typedef unsigned char UINT8;\n");
   if ( bpp !=3 ) {fprintf(file,"// picture resolution = %d * %d * %dbpp\nconst UINT8 %s[%d] = {\n",rawsize[0],rawsize[1],rawbpp,table,rawsize[0] * rawsize[1] * rawbpp);
   for (i=0; i<rawsize[0] * rawsize[1] * rawbpp; i++) {
     fprintf(file,"\t%i,\n",data[i]);
   }
 }
-  // conversion RGBA
+  // with RGBA conversion
   else if (bpp == 3) {fprintf(file,"// picture resolution = %d * %d * %dbpp\ttransparent color rgb values = %d,%d,%d\nconst UINT8 %s[%d] = {\n",rawsize[0],rawsize[1],rawbpp,alpha_color_R,alpha_color_G,alpha_color_B,table,rawsize[0] * rawsize[1] * rawbpp);
   for (i=0; i<rawsize[0] * rawsize[1] * rawbpp; i+=3) {
     fprintf(file,"\t%i,\n\t%i,\n\t%i,\n",data[i],data[i+1],data[i+2]);
@@ -53,7 +53,7 @@ int raw2source()
     else fprintf(file,"\t255,\n");
   }}
 
-  // fin du programme
+  // end
   fprintf( file, "};\n");
   fclose( file );
   free( data );

@@ -1,4 +1,4 @@
-// retour 0 : OK        retour 1 : NOK
+// returns 0 : OK       1 : NOK
 int bin2source()
 {
   unsigned char * data;
