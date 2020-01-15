@@ -1,16 +1,17 @@
 #ifdef __APPLE__
 #define GL_SILENCE_DEPRECATION
 #endif
+#ifdef _WIN32
+#define _CRT_SECURE_NO_WARNINGS
+#include <windows.h>
+#pragma comment(linker, "/SUBSYSTEM:windows /ENTRY:mainCRTStartup")
+#endif
 #include <imgui.h>
 #include <imgui_impl_glfw.h>
 #include <imgui_impl_opengl2.h>
 #include <stdio.h>
 #include <string.h>
 #include <GLFW/glfw3.h>
-#ifdef _WIN32
-#include <windows.h>
-#pragma comment(linker, "/SUBSYSTEM:windows /ENTRY:mainCRTStartup")
-#endif
 #include "defs.h"
 #include "raw2source.c"
 #include "bin2source.c"
