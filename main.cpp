@@ -81,7 +81,7 @@ int main(int, char**)
         ImGui::SameLine();ImGui::InputText("Output", OutputFile, 100);
         ImGui::Button("    UINT8 array name     ");ImGui::SameLine();ImGui::InputText("Array", table, 16);
         ImGui::Button("Enter RAW width / height ");ImGui::SameLine();ImGui::InputInt2("W/H", rawsize);
-        ImGui::Checkbox("UINT8 typedef", &uint8def);ImGui::SameLine();ImGui::Checkbox("File is a RAW image", &raw);ImGui::SameLine();//ImGui::Checkbox("Convert to RGBA", &rgbaconvert);
+        ImGui::Checkbox("UINT8 typedef", &uint8def);ImGui::SameLine();ImGui::Checkbox("File is a RAW image", &raw);
         ImGui::SameLine();ImGui::Text("      RAW is:");ImGui::SameLine();ImGui::RadioButton("24 bits", &bpp, 0);ImGui::SameLine();ImGui::RadioButton("32 bits", &bpp, 1);ImGui::SameLine();ImGui::RadioButton("24->32 conversion", &bpp, 3);
         ImGui::ColorEdit3("Transparent color for RGBA conv.", col1);
         ImGui::Spacing();ImGui::Spacing();ImGui::Spacing();ImGui::Spacing();ImGui::Text("1.1                                        ");ImGui::SameLine();
