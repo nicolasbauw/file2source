@@ -58,10 +58,6 @@ int main(int, char**)
         style.FrameBorderSize = 1.0f;
         window_flags |= ImGuiWindowFlags_NoTitleBar|ImGuiWindowFlags_NoCollapse|ImGuiWindowFlags_NoResize|ImGuiWindowFlags_NoSavedSettings|ImGuiWindowFlags_NoMove;
         ImGui::Begin("File2source", &show_main_window,window_flags);
-        ImGui::PushID(i);
-        ImGui::PushStyleColor(ImGuiCol_Button, (ImVec4)ImColor::HSV(i/7.0f, 0.6f, 0.6f));
-        ImGui::PushStyleColor(ImGuiCol_ButtonHovered, (ImVec4)ImColor::HSV(i/7.0f, 0.7f, 0.7f));
-        ImGui::PushStyleColor(ImGuiCol_ButtonActive, (ImVec4)ImColor::HSV(i/7.0f, 0.8f, 0.8f));
 
         // Graphical file requester only on windows
         #ifndef _WIN32
@@ -88,8 +84,6 @@ int main(int, char**)
         if (ImGui::Button("  Quit  ")) { quit = 1; }
         ImGui::SameLine();
         if (ImGui::Button("Generate")) {if (raw == true) result = raw2source(); if (raw == false) result = bin2source();};
-        ImGui::PopStyleColor(3);
-        ImGui::PopID();
         if (result == 0 || result == 1 || result == 2) ShowPopup();
         ImGui::End();
         
@@ -155,4 +149,3 @@ static void ShowPopup()
     ImGui::Text("   Press left mouse button   ");
     ImGui::End();
 }
-
