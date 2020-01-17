@@ -80,7 +80,7 @@ int main(int, char**)
         ImGui::Checkbox("UINT8 typedef", &uint8def);ImGui::SameLine();ImGui::Checkbox("File is a RAW image", &raw);
         ImGui::SameLine();ImGui::Text("      RAW is:");ImGui::SameLine();ImGui::RadioButton("24 bits", &bpp, 0);ImGui::SameLine();ImGui::RadioButton("32 bits", &bpp, 1);ImGui::SameLine();ImGui::RadioButton("24->32 conversion", &bpp, 3);
         ImGui::ColorEdit3("Transparent color for RGBA conv.", col1);
-        ImGui::Spacing();ImGui::Spacing();ImGui::Spacing();ImGui::Spacing();ImGui::Text("1.1                                        ");ImGui::SameLine();
+        ImGui::Spacing();ImGui::Spacing();ImGui::Spacing();ImGui::Spacing();ImGui::Text("1.0.1                                      ");ImGui::SameLine();
         if (ImGui::Button("  Quit  ")) { quit = 1; }
         ImGui::SameLine();
         if (ImGui::Button("Generate")) {if (raw == true) result = raw2source(); if (raw == false) result = bin2source();};
