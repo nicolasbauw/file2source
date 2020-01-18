@@ -6,4 +6,4 @@ clang -I. -Iimgui -Iimgui/examples -o file2source main.cpp imgui/imgui.cpp imgui
 
 Windows:
  rc resource.rc (you can skip that if you don't want the window icon)
- clang -I. -Iimgui -Iimgui/examples -o file2source.exe main.cpp imgui/imgui.cpp imgui/imgui_draw.cpp imgui/examples/imgui_impl_glfw.cpp imgui/examples/imgui_impl_opengl2.cpp imgui/imgui_widgets.cpp resource.res -lglfw3dll -lopengl32 -lgdi32 -lcomdlg32
+ clang -I. -Iimgui -Iimgui/examples -o file2source.exe main.cpp imgui/imgui.cpp imgui/imgui_draw.cpp imgui/examples/imgui_impl_glfw.cpp imgui/examples/imgui_impl_opengl2.cpp imgui/imgui_widgets.cpp resource.res -lglfw3dll -lopengl32 -lcomdlg32
