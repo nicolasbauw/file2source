@@ -70,12 +70,7 @@ int raw2source()
           fprintf(file, "\t255,\n");
       }
     }
-
-    // end
     fprintf(file, "};\n");
-    fclose(file);
-    free(data);
-    return 0;
   } else 
   {
     if (bpp != 3)
@@ -99,11 +94,9 @@ int raw2source()
           fprintf(file, "\t\t255,\n");
       }
     }
-
-    // end
     fprintf(file, "};\n");
-    fclose(file);
-    free(data);
-    return 0;
   }
+  fclose(file);
+  free(data);
+  return 0;
 }

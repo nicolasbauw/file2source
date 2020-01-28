@@ -30,16 +30,12 @@ int bin2source()
 
   if (!rustsrc)
   {
-    fprintf(file, "typedef unsigned char UINT8;\n");
-    fprintf(file, "const UINT8 %s[%d] = {\n", table, lenght);
+    fprintf(file, "typedef unsigned char UINT8;\nconst UINT8 %s[%d] = {\n", table, lenght);
     for (i = 0; i < lenght; i++)
     {
       fprintf(file, "\t%i,\n", data[i]);
     }
     fprintf(file, "};\n");
-    fclose(file);
-    free(data);
-    return 0;
   }
   else
   {
@@ -49,8 +45,8 @@ int bin2source()
       fprintf(file, "\t\t%i,\n", data[i]);
     }
     fprintf(file, "\t]};\n}");
-    fclose(file);
-    free(data);
-    return 0;
   }
+  fclose(file);
+  free(data);
+  return 0;
 }
