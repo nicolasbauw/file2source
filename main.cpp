@@ -61,26 +61,26 @@ int main(int, char**)
 
         // Graphical file requester only on windows
         #ifndef _WIN32
-        if (ImGui::Button("Select binary or RAW file")) {};
+        if (ImGui::Button("    Select input file    ")) {};
         #endif
         #ifdef _WIN32
-        if (ImGui::Button("Select binary or RAW file")) {GetFileName(); strcpy(InputFile,szFile);};
+        if (ImGui::Button("    Select input file    ")) {GetFileName(); strcpy(InputFile,szFile);};
         #endif
         ImGui::SameLine();ImGui::InputText("Input", InputFile, 100);
         #ifndef _WIN32
-        if (ImGui::Button("  Select C source file   ")) {};
+        if (ImGui::Button("   Select output file    ")) {};
         #endif
         #ifdef _WIN32
-        if (ImGui::Button("  Select C source file   ")) {GetFileName(); strcpy(OutputFile,szFile);};
+        if (ImGui::Button("   Select output file    ")) {GetFileName(); strcpy(OutputFile,szFile);};
         #endif
 
         ImGui::SameLine();ImGui::InputText("Output", OutputFile, 100);
         ImGui::Button("    UINT8 array name     ");ImGui::SameLine();ImGui::InputText("Array", table, 16);
         ImGui::Button("Enter RAW width / height ");ImGui::SameLine();ImGui::InputInt2("W/H", rawsize);
-        ImGui::Checkbox("UINT8 typedef", &uint8def);ImGui::SameLine();ImGui::Checkbox("File is a RAW image", &raw);
+        ImGui::Checkbox("Save as Rust src", &rustsrc);ImGui::SameLine();ImGui::Checkbox("File is a RAW image", &raw);
         ImGui::SameLine();ImGui::Text("      RAW is:");ImGui::SameLine();ImGui::RadioButton("24 bits", &bpp, 0);ImGui::SameLine();ImGui::RadioButton("32 bits", &bpp, 1);ImGui::SameLine();ImGui::RadioButton("24->32 conversion", &bpp, 3);
         ImGui::ColorEdit3("Transparent color for RGBA conv.", col1);
-        ImGui::Spacing();ImGui::Spacing();ImGui::Spacing();ImGui::Spacing();ImGui::Text("1.0.1                                      ");ImGui::SameLine();
+        ImGui::Spacing();ImGui::Spacing();ImGui::Spacing();ImGui::Spacing();ImGui::Text("1.1.0                                      ");ImGui::SameLine();
         if (ImGui::Button("  Quit  ")) { quit = 1; }
         ImGui::SameLine();
         if (ImGui::Button("Generate")) {if (raw == true) result = raw2source(); if (raw == false) result = bin2source();};
@@ -141,7 +141,7 @@ static void ShowPopup()
         ImGui::End();
         return;
     }
-    if (result == 0) ImGui::Text("Successfully wrote C source !");
+    if (result == 0) ImGui::Text(" Successfully wrote source ! ");
     if (result == 1) ImGui::Text("     Read / write error !    ");
     if (result == 2) ImGui::Text("  Enter RAW width / height ! ");
     if (ImGui::IsMouseClicked(0)) result=3;
