@@ -136,7 +136,7 @@ static void ShowPopup()
     ImGui::SetNextWindowPos(ImVec2(540,139));
     ImGuiStyle& popupstyle = ImGui::GetStyle();
     popupstyle.Colors[ImGuiCol_WindowBg] = ImVec4(0.0f, 0.0f, 0.0f, 1.0f);
-    if (!ImGui::Begin("Example: Fixed Overlay", opened, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoNav))
+    if (!ImGui::Begin("Overlay", opened, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoNav))
     {
         ImGui::End();
         return;
