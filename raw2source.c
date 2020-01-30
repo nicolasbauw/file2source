@@ -75,7 +75,7 @@ int raw2source()
   {
     if (bpp != 3)
     {
-      fprintf(file, "// picture resolution = %d * %d * %dbpp\nlazy_static! {\n\tpub static ref PIXELS: Vec<u32> =  { vec![\n", rawsize[0], rawsize[1], rawbpp);
+      fprintf(file, "// picture resolution = %d * %d * %dbpp\nlazy_static! {\n\tpub static ref BYTES: Vec<u8> =  { vec![\n", rawsize[0], rawsize[1], rawbpp);
       for (i = 0; i < rawsize[0] * rawsize[1] * rawbpp; i++)
       {
         fprintf(file, "\t\t%i,\n", data[i]);
@@ -84,7 +84,7 @@ int raw2source()
     // with RGBA conversion
     else if (bpp == 3)
     {
-      fprintf(file, "// picture resolution = %d * %d * %dbpp\ttransparent color rgb values = %d,%d,%d\nlazy_static! {\n\tpub static ref PIXELS: Vec<u32> =  { vec![\n", rawsize[0], rawsize[1], rawbpp, alpha_color_R, alpha_color_G, alpha_color_B);
+      fprintf(file, "// picture resolution = %d * %d * %dbpp\ttransparent color rgb values = %d,%d,%d\nlazy_static! {\n\tpub static ref BYTES: Vec<u8> =  { vec![\n", rawsize[0], rawsize[1], rawbpp, alpha_color_R, alpha_color_G, alpha_color_B);
       for (i = 0; i < rawsize[0] * rawsize[1] * rawbpp; i += 3)
       {
         fprintf(file, "\t\t%i,\n\t\t%i,\n\t\t%i,\n", data[i], data[i + 1], data[i + 2]);

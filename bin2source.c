@@ -60,7 +60,7 @@ int bin2source()
   }
   else
   {
-    fprintf(file, "lazy_static! {\n\tpub static ref PIXELS: Vec<u32> =  { vec![\n");
+    fprintf(file, "lazy_static! {\n\tpub static ref BYTES: Vec<u8> =  { vec![\n");
     for (i = 0; i < length; i++)
     {
       fprintf(file, "\t\t%i,\n", data[i]);
