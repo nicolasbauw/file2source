@@ -2,8 +2,8 @@ git submodule init
 git submodule update
 
 Macos:
-clang -I. -Iimgui -Iimgui/examples -o file2source main.cpp imgui/imgui.cpp imgui/imgui_draw.cpp imgui/examples/imgui_impl_glfw.cpp imgui/examples/imgui_impl_opengl2.cpp imgui/imgui_widgets.cpp -lc++ -lglfw -framework Cocoa -framework OpenGL -framework IOKit -framework CoreVideo
+clang -I. -Iimgui -Iimgui/examples -Ilodepng -o file2source main.cpp lodepng/lodepng.cpp imgui/imgui.cpp imgui/imgui_draw.cpp imgui/examples/imgui_impl_glfw.cpp imgui/examples/imgui_impl_opengl2.cpp imgui/imgui_widgets.cpp -lc++ -lglfw -framework Cocoa -framework OpenGL -framework IOKit -framework CoreVideo
 
 Windows:
  rc resource.rc (you can skip that if you don't want the window icon)
- clang -I. -Iimgui -Iimgui/examples -o file2source.exe main.cpp imgui/imgui.cpp imgui/imgui_draw.cpp imgui/examples/imgui_impl_glfw.cpp imgui/examples/imgui_impl_opengl2.cpp imgui/imgui_widgets.cpp resource.res -lglfw3dll -lopengl32 -lcomdlg32
+ clang -I. -Iimgui -Iimgui/examples -Ilodepng -o file2source.exe main.cpp lodepng/lodepng.cpp imgui/imgui.cpp imgui/imgui_draw.cpp imgui/examples/imgui_impl_glfw.cpp imgui/examples/imgui_impl_opengl2.cpp imgui/imgui_widgets.cpp resource.res -lglfw3dll -lopengl32 -lcomdlg32

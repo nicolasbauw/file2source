@@ -16,26 +16,26 @@
 #include "raw2source.c"
 #include "bin2source.c"
 
-static void error_callback(int error, const char* description)
+static void error_callback(int error, const char *description)
 {
     fprintf(stderr, "Error %d: %s\n", error, description);
 }
 
-int main(int, char**)
+int main(int, char **)
 {
     // Setup window
     glfwSetErrorCallback(error_callback);
     if (!glfwInit())
         return 1;
-    
-    glfwWindowHint(GLFW_RESIZABLE,GL_FALSE);
-    GLFWwindow* window = glfwCreateWindow(760,190, "File2source", NULL, NULL);
+
+    glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
+    GLFWwindow *window = glfwCreateWindow(760, 190, "File2source", NULL, NULL);
     glfwMakeContextCurrent(window);
     glfwSwapInterval(1);
 
     ImGui::CreateContext();
-    ImGuiIO& io = ImGui::GetIO();
-        io.IniFilename = NULL;
+    ImGuiIO &io = ImGui::GetIO();
+    io.IniFilename = NULL;
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL2_Init();
 
@@ -50,43 +50,87 @@ int main(int, char**)
         ImGui::NewFrame();
 
         // Interface display
-        ImGui::SetNextWindowSize(ImVec2(760,190));
+        ImGui::SetNextWindowSize(ImVec2(760, 190));
         ImGui::SetNextWindowPos(ImVec2(0, 0));
-        ImGuiStyle& style = ImGui::GetStyle();
+        ImGuiStyle &style = ImGui::GetStyle();
         style.Colors[ImGuiCol_Border] = ImVec4(0.7f, 0.7f, 0.7f, 0.5f);
         style.Colors[ImGuiCol_WindowBg] = ImVec4(0.25f, 0.25f, 0.25f, 1.0f);
         style.FrameBorderSize = 1.0f;
-        window_flags |= ImGuiWindowFlags_NoTitleBar|ImGuiWindowFlags_NoCollapse|ImGuiWindowFlags_NoResize|ImGuiWindowFlags_NoSavedSettings|ImGuiWindowFlags_NoMove;
-        ImGui::Begin("File2source", &show_main_window,window_flags);
+        window_flags |= ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoMove;
+        ImGui::Begin("File2source", &show_main_window, window_flags);
 
-        // Graphical file requester only on windows
-        #ifndef _WIN32
-        if (ImGui::Button("    Select input file    ")) {};
-        #endif
-        #ifdef _WIN32
-        if (ImGui::Button("    Select input file    ")) {GetFileName(); strcpy(InputFile,szFile);};
-        #endif
-        ImGui::SameLine();ImGui::InputText("Input", InputFile, 100);
-        #ifndef _WIN32
-        if (ImGui::Button("   Select output file    ")) {};
-        #endif
-        #ifdef _WIN32
-        if (ImGui::Button("   Select output file    ")) {GetFileName(); strcpy(OutputFile,szFile);};
-        #endif
-
-        ImGui::SameLine();ImGui::InputText("Output", OutputFile, 100);
-        ImGui::Button("    UINT8 array name     ");ImGui::SameLine();ImGui::InputText("Array", table, 16);
-        ImGui::Button("Enter RAW width / height ");ImGui::SameLine();ImGui::InputInt2("W/H", rawsize);
-        ImGui::Checkbox("Save as Rust src", &rustsrc);ImGui::SameLine();ImGui::Checkbox("File is a RAW image", &raw);
-        ImGui::SameLine();ImGui::Text("      RAW is:");ImGui::SameLine();ImGui::RadioButton("24 bits", &bpp, 0);ImGui::SameLine();ImGui::RadioButton("32 bits", &bpp, 1);ImGui::SameLine();ImGui::RadioButton("24->32 conversion", &bpp, 3);
-        ImGui::ColorEdit3("Transparent color for RGBA conv.", col1);
-        ImGui::Spacing();ImGui::Spacing();ImGui::Spacing();ImGui::Spacing();ImGui::Text("1.1.0                                      ");ImGui::SameLine();
-        if (ImGui::Button("  Quit  ")) { quit = 1; }
+// Graphical file requester only on windows
+#ifndef _WIN32
+        if (ImGui::Button("    Select input file    "))
+        {
+        };
+#endif
+#ifdef _WIN32
+        if (ImGui::Button("    Select input file    "))
+        {
+            GetFileName();
+            strcpy(InputFile, szFile);
+        };
+#endif
         ImGui::SameLine();
-        if (ImGui::Button("Generate")) {if (raw == true) result = raw2source(); if (raw == false) result = bin2source();};
-        if (result == 0 || result == 1 || result == 2) ShowPopup();
+        ImGui::InputText("Input", InputFile, 100);
+#ifndef _WIN32
+        if (ImGui::Button("   Select output file    "))
+        {
+        };
+#endif
+#ifdef _WIN32
+        if (ImGui::Button("   Select output file    "))
+        {
+            GetFileName();
+            strcpy(OutputFile, szFile);
+        };
+#endif
+
+        ImGui::SameLine();
+        ImGui::InputText("Output", OutputFile, 100);
+        ImGui::Button("    UINT8 array name     ");
+        ImGui::SameLine();
+        ImGui::InputText("Array", table, 16);
+        ImGui::Button("Enter RAW width / height ");
+        ImGui::SameLine();
+        ImGui::InputInt2("W/H", rawsize);
+        ImGui::Checkbox("Save as Rust", &rustsrc);
+        ImGui::SameLine();
+        ImGui::Checkbox("Decode PNG", &decodepng);
+        ImGui::SameLine();
+        ImGui::Checkbox("RAW image", &raw);
+        ImGui::SameLine();
+        ImGui::Text("       RAW is:");
+        ImGui::SameLine();
+        ImGui::RadioButton("24 bits", &bpp, 0);
+        ImGui::SameLine();
+        ImGui::RadioButton("32 bits", &bpp, 1);
+        ImGui::SameLine();
+        ImGui::RadioButton("24->32 conversion", &bpp, 3);
+        ImGui::ColorEdit3("Transparent color for RGBA conv.", col1);
+        ImGui::Spacing();
+        ImGui::Spacing();
+        ImGui::Spacing();
+        ImGui::Spacing();
+        ImGui::Text("1.1.0                                      ");
+        ImGui::SameLine();
+        if (ImGui::Button("  Quit  "))
+        {
+            quit = 1;
+        }
+        ImGui::SameLine();
+        if (ImGui::Button("Generate"))
+        {
+            if (raw == true)
+                result = raw2source();
+            if (raw == false)
+                result = bin2source();
+        };
+        if (result == 0 || result == 1 || result == 2 || result == 3)
+            ShowPopup();
         ImGui::End();
-        
+
         // Rendering
         ImGui::Render();
         glfwGetFramebufferSize(window, &display_w, &display_h);
@@ -113,38 +157,44 @@ int main(int, char**)
 //Filename requester
 void GetFileName()
 {
-        // open a file name
-    	ZeroMemory( &ofn , sizeof( ofn));
-    	ofn.lStructSize = sizeof ( ofn );
-    	ofn.hwndOwner = NULL  ;
-    	ofn.lpstrFile = szFile ;
-    	ofn.lpstrFile[0] = '\0';
-    	ofn.nMaxFile = sizeof( szFile );
-    	ofn.lpstrFilter = "All\0*.*\0RAW\0*.RAW\0C source\0*.c\0";
-    	ofn.nFilterIndex =1;
-    	ofn.lpstrFileTitle = NULL ;
-    	ofn.nMaxFileTitle = 0 ;
-    	ofn.lpstrInitialDir=NULL ;
-    	GetOpenFileName( &ofn );
-    };
+    // open a file name
+    ZeroMemory(&ofn, sizeof(ofn));
+    ofn.lStructSize = sizeof(ofn);
+    ofn.hwndOwner = NULL;
+    ofn.lpstrFile = szFile;
+    ofn.lpstrFile[0] = '\0';
+    ofn.nMaxFile = sizeof(szFile);
+    ofn.lpstrFilter = "All\0*.*\0RAW\0*.RAW\0C source\0*.c\0";
+    ofn.nFilterIndex = 1;
+    ofn.lpstrFileTitle = NULL;
+    ofn.nMaxFileTitle = 0;
+    ofn.lpstrInitialDir = NULL;
+    GetOpenFileName(&ofn);
+};
 #endif
 
 // Messages display
 static void ShowPopup()
 {
-    bool* opened = &show_app_fixed_overlay;
-    ImGui::SetNextWindowPos(ImVec2(540,139));
-    ImGuiStyle& popupstyle = ImGui::GetStyle();
+    bool *opened = &show_app_fixed_overlay;
+    ImGui::SetNextWindowPos(ImVec2(540, 139));
+    ImGuiStyle &popupstyle = ImGui::GetStyle();
     popupstyle.Colors[ImGuiCol_WindowBg] = ImVec4(0.0f, 0.0f, 0.0f, 1.0f);
     if (!ImGui::Begin("Overlay", opened, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoNav))
     {
         ImGui::End();
         return;
     }
-    if (result == 0) ImGui::Text(" Successfully wrote source ! ");
-    if (result == 1) ImGui::Text("     Read / write error !    ");
-    if (result == 2) ImGui::Text("  Enter RAW width / height ! ");
-    if (ImGui::IsMouseClicked(0)) result=3;
+    if (result == 0)
+        ImGui::Text(" Successfully wrote source ! ");
+    if (result == 1)
+        ImGui::Text("     Read / write error !    ");
+    if (result == 2)
+        ImGui::Text("  Enter RAW width / height ! ");
+    if (result == 3)
+        ImGui::Text("     PNG decoding error !    ");
+    if (ImGui::IsMouseClicked(0))
+        result = 4;
     ImGui::Separator();
     ImGui::Text("   Press left mouse button   ");
     ImGui::End();

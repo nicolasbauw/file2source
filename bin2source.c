@@ -1,9 +1,17 @@
-// returns 0 : OK       1 : NOK
+#include "lodepng/lodepng.h"
+
+// returns 0 : OK       1 : NOK       3 : PNG decoding error
 int bin2source()
 {
+  // For PNG decoding
+  unsigned error;
+  unsigned char *image = 0;
+  unsigned width, height;
+  size_t pngsize;
+
   unsigned char *data;
   FILE *file;
-  int i, lenght;
+  int i, length;
   // open data file
   file = fopen(InputFile, "rb");
   if (file == NULL)
@@ -11,14 +19,14 @@ int bin2source()
 
   // get file size
   fseek(file, 0, SEEK_END);
-  lenght = ftell(file);
+  length = ftell(file);
   fseek(file, 0, SEEK_SET);
 
   // allocate buffer
-  data = (unsigned char *)malloc(lenght);
+  data = (unsigned char *)malloc(length);
 
   // read file data
-  fread(data, lenght, 1, file);
+  fread(data, length, 1, file);
   fclose(file);
 
   file = fopen(OutputFile, "w");
@@ -28,10 +36,23 @@ int bin2source()
     return 1;
   }
 
+  if (decodepng)
+  {
+    error = lodepng_decode32(&image, &width, &height, data, pngsize);
+    if (error)
+      return 3;
+
+    // We re-use the data pointer which will now contain decoded data
+    free(data);
+    data = image;
+    // length for RGBA bitmap
+    length = width * height * 4;
+  }
+
   if (!rustsrc)
   {
-    fprintf(file, "typedef unsigned char UINT8;\nconst UINT8 %s[%d] = {\n", table, lenght);
-    for (i = 0; i < lenght; i++)
+    fprintf(file, "typedef unsigned char UINT8;\nconst UINT8 %s[%d] = {\n", table, length);
+    for (i = 0; i < length; i++)
     {
       fprintf(file, "\t%i,\n", data[i]);
     }
@@ -40,13 +61,20 @@ int bin2source()
   else
   {
     fprintf(file, "lazy_static! {\n\tpub static ref PIXELS: Vec<u32> =  { vec![\n");
-    for (i = 0; i < lenght; i++)
+    for (i = 0; i < length; i++)
     {
       fprintf(file, "\t\t%i,\n", data[i]);
     }
     fprintf(file, "\t]};\n}");
   }
   fclose(file);
-  free(data);
+  if (!decodepng)
+  {
+    free(data);
+  }
+  if (decodepng)
+  {
+    free(image);
+  }
   return 0;
 }
