@@ -55,12 +55,12 @@ int bin2source()
   }
   else
   {
-    fprintf(file, "lazy_static! {\n\tpub static ref BYTES: Vec<u8> =  { vec![\n");
+    fprintf(file, "typedef unsigned char UINT8;\nconst UINT8 %s[%d] = {\n", table, length);
     for (i = 0; i < length; i++)
     {
-      fprintf(file, "\t\t%i,\n", data[i]);
+      fprintf(file, "\t%i,\n", data[i]);
     }
-    fprintf(file, "\t]};\n}");
+    fprintf(file, "};\n");
   }
   fclose(file);
   if (!decodepng)
