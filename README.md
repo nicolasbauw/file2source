@@ -8,7 +8,7 @@ It can also decode a PNG image and save its rgba data as `uint8` array or a RAW 
 This repo is an exhumation of an old tool I wrote in my SDL / OpenGL / CodeBlocks / mingw learning and coding times.
 At that time SDL transparency was handled by a mask, and then, when I switched to OpenGL, I needed a RGB -> RGBA conversion to convert my SDL bitmaps with a green back to more conventional RGBA bitmaps.
 
-As of 1.0.1, the (very) old source has been relatively untouched, but reworked to be a little less ugly, and to be compiled with clang on Windows and Mac with the latest release of imgui.
+The (very) old source has been relatively untouched, but reworked to be a little less ugly, and compiled with clang on Windows and Mac with the latest release of imgui.
 It still has the same shitty code and ergonomy, but still does the job.
 
 1.1.0 added the PNG features. Rust feature was abandoned when I realized there is a include_bytes! macro.
