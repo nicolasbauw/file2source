@@ -5,7 +5,7 @@ char szFile[100];
 int rawsize[2];         // rawsize[0] = width     rawsize[1] = height
 static bool quit = 0;
 static bool raw = false;
-static bool rustsrc = false;
+static bool pngasraw = false;
 static bool decodepng = false;
 static bool show_main_window = true;
 static float col1[3] = { 0.0f,1.0f,0.0f };

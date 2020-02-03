@@ -49,14 +49,9 @@ int bin2source()
     length = width * height * 4;
   }
 
-  if (!rustsrc)
+  if (pngasraw)
   {
-    fprintf(file, "typedef unsigned char UINT8;\nconst UINT8 %s[%d] = {\n", table, length);
-    for (i = 0; i < length; i++)
-    {
-      fprintf(file, "\t%i,\n", data[i]);
-    }
-    fprintf(file, "};\n");
+    fwrite(data, length, 1, file);
   }
   else
   {

@@ -95,9 +95,9 @@ int main(int, char **)
         ImGui::Button("Enter RAW width / height ");
         ImGui::SameLine();
         ImGui::InputInt2("W/H", rawsize);
-        ImGui::Checkbox("Save as Rust", &rustsrc);
-        ImGui::SameLine();
         ImGui::Checkbox("Decode PNG", &decodepng);
+        ImGui::SameLine();
+        ImGui::Checkbox("PNG as bin", &pngasraw);
         ImGui::SameLine();
         ImGui::Checkbox("RAW image", &raw);
         ImGui::SameLine();
@@ -186,7 +186,7 @@ static void ShowPopup()
         return;
     }
     if (result == 0)
-        ImGui::Text(" Successfully wrote source ! ");
+        ImGui::Text("  Successfully wrote file !  ");
     if (result == 1)
         ImGui::Text("     Read / write error !    ");
     if (result == 2)
