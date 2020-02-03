@@ -39,8 +39,7 @@ int raw2source()
   if ( file == NULL ) { free( data ); return 1; }
 
   // without RGBA conversion
-  if (uint8def) fprintf(file,"typedef unsigned char UINT8;\n");
-  if ( bpp !=3 ) {fprintf(file,"// picture resolution = %d * %d * %dbpp\nconst UINT8 %s[%d] = {\n",rawsize[0],rawsize[1],rawbpp,table,rawsize[0] * rawsize[1] * rawbpp);
+  if ( bpp !=3 ) {fprintf(file,"// picture resolution = %d * %d * %dbpp\ntypedef unsigned char UINT8;\nconst UINT8 %s[%d] = {\n",rawsize[0],rawsize[1],rawbpp,table,rawsize[0] * rawsize[1] * rawbpp);
   for (i=0; i<rawsize[0] * rawsize[1] * rawbpp; i++) {
     fprintf(file,"\t%i,\n",data[i]);
   }
