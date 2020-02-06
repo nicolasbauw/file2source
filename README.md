@@ -3,7 +3,7 @@ A graphical tool to generate C source code from a file whatever the format, with
 
 An easy way to include binary data to your source code, if you want to distribute you app in a single file.
 This tool can convert RGB RAW pictures to RGBA format with selection of alpha color.
-It can also decode a PNG image and save its rgba data as `uint8` array or a RAW binary file.
+It can also decode a PNG image and save its rgba data as `uint8` array or a RAW binary file (if you don't want to embed a PNG decoding library in your code).
 
 This repo is an exhumation of an old tool I wrote in my SDL / OpenGL / CodeBlocks / mingw learning and coding times.
 At that time SDL transparency was handled by a mask, and then, when I switched to OpenGL, I needed a RGB -> RGBA conversion to convert my SDL bitmaps with a green back to more conventional RGBA bitmaps.
