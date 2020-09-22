@@ -75,7 +75,7 @@ int main(int, char**)
 
         ImGui::SameLine();ImGui::InputText("Output", OutputFile, 100);
         ImGui::Button("    UINT8 array name     ");ImGui::SameLine();ImGui::InputText("Array", table, 16);
-        ImGui::Spacing();ImGui::Spacing();ImGui::Spacing();ImGui::Spacing();ImGui::Text("1.1.0                                      ");ImGui::SameLine();
+        ImGui::Spacing();ImGui::Spacing();ImGui::Spacing();ImGui::Spacing();ImGui::Text("1.2.0                                      ");ImGui::SameLine();
         if (ImGui::Button("  Quit  ")) { quit = 1; }
         ImGui::SameLine();
         if (ImGui::Button("Generate")) result = bin2source();
