@@ -23,8 +23,7 @@ int bin2source()
   file=fopen(OutputFile, "w");
   if ( file == NULL )  { free( data ); return 1; }
 
-  if (uint8def) fprintf(file,"typedef unsigned char UINT8;\n");
-  fprintf(file,"const UINT8 %s[%d] = {\n",table,lenght);
+  fprintf(file,"typedef unsigned char UINT8;\nconst UINT8 %s[%d] = {\n",table,lenght);
   for (i=0; i<lenght; i++) {
     fprintf(file,"\t%i,\n",data[i]);
   }

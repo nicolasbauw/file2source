@@ -13,7 +13,6 @@
 #include <string.h>
 #include <GLFW/glfw3.h>
 #include "defs.h"
-#include "raw2source.c"
 #include "bin2source.c"
 
 static void error_callback(int error, const char* description)
@@ -29,7 +28,7 @@ int main(int, char**)
         return 1;
     
     glfwWindowHint(GLFW_RESIZABLE,GL_FALSE);
-    GLFWwindow* window = glfwCreateWindow(760,190, "File2source", NULL, NULL);
+    GLFWwindow* window = glfwCreateWindow(760,120, "File2source", NULL, NULL);
     glfwMakeContextCurrent(window);
     glfwSwapInterval(1);
 
@@ -50,7 +49,7 @@ int main(int, char**)
         ImGui::NewFrame();
 
         // Interface display
-        ImGui::SetNextWindowSize(ImVec2(760,190));
+        ImGui::SetNextWindowSize(ImVec2(760, 120));
         ImGui::SetNextWindowPos(ImVec2(0, 0));
         ImGuiStyle& style = ImGui::GetStyle();
         style.Colors[ImGuiCol_Border] = ImVec4(0.7f, 0.7f, 0.7f, 0.5f);
@@ -61,10 +60,10 @@ int main(int, char**)
 
         // Graphical file requester only on windows
         #ifndef _WIN32
-        if (ImGui::Button("Select binary or RAW file")) {};
+        if (ImGui::Button("    Select input file    ")) {};
         #endif
         #ifdef _WIN32
-        if (ImGui::Button("Select binary or RAW file")) {GetFileName(); strcpy(InputFile,szFile);};
+        if (ImGui::Button("    Select input file    ")) {GetFileName(); strcpy(InputFile,szFile);};
         #endif
         ImGui::SameLine();ImGui::InputText("Input", InputFile, 100);
         #ifndef _WIN32
@@ -76,14 +75,10 @@ int main(int, char**)
 
         ImGui::SameLine();ImGui::InputText("Output", OutputFile, 100);
         ImGui::Button("    UINT8 array name     ");ImGui::SameLine();ImGui::InputText("Array", table, 16);
-        ImGui::Button("Enter RAW width / height ");ImGui::SameLine();ImGui::InputInt2("W/H", rawsize);
-        ImGui::Checkbox("UINT8 typedef", &uint8def);ImGui::SameLine();ImGui::Checkbox("File is a RAW image", &raw);
-        ImGui::SameLine();ImGui::Text("      RAW is:");ImGui::SameLine();ImGui::RadioButton("24 bits", &bpp, 0);ImGui::SameLine();ImGui::RadioButton("32 bits", &bpp, 1);ImGui::SameLine();ImGui::RadioButton("24->32 conversion", &bpp, 3);
-        ImGui::ColorEdit3("Transparent color for RGBA conv.", col1);
-        ImGui::Spacing();ImGui::Spacing();ImGui::Spacing();ImGui::Spacing();ImGui::Text("1.0.1                                      ");ImGui::SameLine();
+        ImGui::Spacing();ImGui::Spacing();ImGui::Spacing();ImGui::Spacing();ImGui::Text("1.1.0                                      ");ImGui::SameLine();
         if (ImGui::Button("  Quit  ")) { quit = 1; }
         ImGui::SameLine();
-        if (ImGui::Button("Generate")) {if (raw == true) result = raw2source(); if (raw == false) result = bin2source();};
+        if (ImGui::Button("Generate")) result = bin2source();
         if (result == 0 || result == 1 || result == 2) ShowPopup();
         ImGui::End();
         
@@ -133,7 +128,7 @@ void GetFileName()
 static void ShowPopup()
 {
     bool* opened = &show_app_fixed_overlay;
-    ImGui::SetNextWindowPos(ImVec2(540,139));
+    ImGui::SetNextWindowPos(ImVec2(540,69));
     ImGuiStyle& popupstyle = ImGui::GetStyle();
     popupstyle.Colors[ImGuiCol_WindowBg] = ImVec4(0.0f, 0.0f, 0.0f, 1.0f);
     if (!ImGui::Begin("Example: Fixed Overlay", opened, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoNav))
