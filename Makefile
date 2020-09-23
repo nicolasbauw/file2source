@@ -5,7 +5,7 @@ all: main.o bin2source.o imgui.o imgui_draw.o imgui_impl_glfw.o imgui_impl_openg
 	$(CC) -o file2source main.o imgui.o imgui_draw.o imgui_impl_glfw.o imgui_impl_opengl2.o imgui_widgets.o $(LDFLAGS)
 
 main.o:
-	$(CC) -c main.cpp -I. -Iimgui -Iimgui/examples
+	$(CC) -c main.cpp -Iimgui -Iimgui/examples
 
 bin2source.o:
 	$(CC) -c bin2source.c
