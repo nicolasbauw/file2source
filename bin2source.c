@@ -1,3 +1,10 @@
+#include <stdlib.h>
+#include <stdio.h>
+
+char InputFile[100] ;      // buffers for file names
+char OutputFile[100];
+char table[100];
+
 // returns 0 : OK       1 : NOK
 int bin2source()
 {

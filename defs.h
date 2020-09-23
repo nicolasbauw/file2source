@@ -1,6 +1,3 @@
-char InputFile[100] ;      // buffers for file names
-char OutputFile[100];
-char table[100];
 char szFile[100];
 static bool quit = 0;
 static bool show_main_window = true;
