@@ -7,6 +7,9 @@ all: main.o bin2source.o imgui.o imgui_draw.o imgui_impl_glfw.o imgui_impl_openg
 main.o:
 	$(CC) -c main.cpp -I. -Iimgui -Iimgui/examples
 
+bin2source.o:
+	$(CC) -c bin2source.c
+
 imgui.o:
 	$(CC) -c imgui/imgui.cpp
 
