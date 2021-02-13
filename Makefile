@@ -1,5 +1,5 @@
 CC = clang
-LDFLAGS = -lc++ -lglfw -framework Cocoa -framework OpenGL -framework IOKit -framework CoreVideo
+LDFLAGS = -lc++ -lglfw -framework Cocoa -framework OpenGL -framework IOKit -framework CoreVideo -L /opt/homebrew/Cellar/glfw/3.3.2/lib
 
 all: main.o bin2source.o imgui.o imgui_draw.o imgui_impl_glfw.o imgui_impl_opengl2.o imgui_widgets.o
 	$(CC) -o file2source main.o imgui.o imgui_draw.o imgui_impl_glfw.o imgui_impl_opengl2.o imgui_widgets.o $(LDFLAGS)
