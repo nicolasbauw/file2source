@@ -1,5 +1,5 @@
 CC = clang
-LDFLAGS = -lc++ -framework Cocoa -framework OpenGL -framework IOKit -framework CoreVideo `pkg-config --libs --cflags glfw3`
+LDFLAGS = -lc++ -framework Cocoa -framework OpenGL -framework IOKit -framework CoreVideo `pkg-config --libs glfw3`
 
 all: main.o bin2source.o imgui.o imgui_draw.o imgui_impl_glfw.o imgui_impl_opengl2.o imgui_widgets.o
 	$(CC) -o file2source main.o imgui.o imgui_draw.o imgui_impl_glfw.o imgui_impl_opengl2.o imgui_widgets.o $(LDFLAGS)
